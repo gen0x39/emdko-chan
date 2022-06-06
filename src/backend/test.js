@@ -16,7 +16,7 @@ const json = {
 shell.send(json);
 
 shell.on("message", data => {
-    console.log(data.result);
+    console.log(JSON.stringify(data, null, 2));
 });
 
 shell.end();

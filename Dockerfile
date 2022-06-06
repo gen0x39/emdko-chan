@@ -24,3 +24,4 @@ ENV APIKEY=${apikey}
 
 # install Python3
 RUN apt-get install -y python3 python3-pip
+RUN pip3 install googletrans==4.0.0-rc1
