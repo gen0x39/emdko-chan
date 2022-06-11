@@ -21,6 +21,7 @@ client.on("interactionCreate", async (interaction) => {
         await interaction.reply('Pong!');
     }
     else if (interaction.commandName === 'tl') {
+        await interaction.deferReply();
         const options = {
             mode: "json",
             pythonPath: "/usr/bin/python3",
@@ -36,6 +37,8 @@ client.on("interactionCreate", async (interaction) => {
         shell.send(json);
         shell.on('message', function (data) {
             console.log(JSON.stringify(data, null, 2));
+            console.log(data.result.JP)
+            interaction.editReply(data.result.JP);
         });
     }
 });
