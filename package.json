@@ -1,9 +1,10 @@
 {
   "dependencies": {
-    "discord.js": "^12.5.3",
-    "python-shell": "^3.0.1"
+    "discord.js": "^13.1.0",
+    "python-shell": "^3.0.1",
+    "dotenv": "^16.0.1"
   },
   "scripts": {
-    "start": "node src/bot.js"
+    "start": "node src/backend/bot.js"
   }
 }

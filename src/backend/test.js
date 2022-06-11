@@ -1,4 +1,4 @@
-var { PythonShell, } = require("python-shell");
+var { PythonShell } = require("python-shell");
 
 const options = {
   mode: "json",
@@ -10,7 +10,7 @@ const options = {
 var shell = new PythonShell("script.py", options);
 const json = {
     "name": "tachiba7",
-    "text": "Hello World!",
+    "text": "I am studying chinese.",
 };
 
 shell.send(json);
