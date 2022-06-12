@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const Commands = require('./commands.js');
 const { PythonShell } = require('python-shell');
 const { MessageEmbed } = require('discord.js');
+const { MessageAttachment } = require("discord.js");
 
 dotenv.config();
 
@@ -34,11 +35,13 @@ const commands = {
             "text": interaction.options.getString("input")
         };
         shell.send(json);
-        
+
+        const emdimg = new MessageAttachment("/workspace/assets/emd-ko-chan.jpg"); 
+
         shell.on("message", function (data) {
             const exampleEmbed = new MessageEmbed()
             .setColor('#0099ff')
-            .setAuthor({ name: '翻訳結果'})
+            .setAuthor({ name: '翻訳結果', iconURL: 'attachment://emd-ko-chan.jpg'})
             .addFields(
                 { name: 'Input', value: interaction.options.getString("input"), inline: false },
                 { name: '-> JP', value: data.result.JP, inline: false },
@@ -47,7 +50,8 @@ const commands = {
                 { name: '-> CN', value: data.result.CN, inline: false },
                 { name: '-> TW', value: data.result.TW, inline: false },
             )
-            interaction.editReply({ embeds: [exampleEmbed]});
+            interaction.editReply({ embeds: [exampleEmbed], files: [emdimg]});
+            console.log(emdimg)
         });
         return;
     }
