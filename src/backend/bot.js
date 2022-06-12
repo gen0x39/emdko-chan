@@ -4,6 +4,27 @@ const { Client, Intents } = require('discord.js');
 const dotenv = require('dotenv');
 const Commands = require('./commands.js');
 const { PythonShell } = require('python-shell');
+const { MessageEmbed } = require('discord.js');
+
+// inside a command, event listener, etc.
+const exampleEmbed = new MessageEmbed()
+	.setColor('#0099ff')
+	.setTitle('Some title')
+	.setURL('https://discord.js.org/')
+	.setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
+	.setDescription('Some description here')
+	.setThumbnail('https://i.imgur.com/AfFp7pu.png')
+	.addFields(
+		{ name: 'Regular field title', value: 'Some value here' },
+		{ name: '\u200B', value: '\u200B' },
+		{ name: 'Inline field title', value: 'Some value here', inline: true },
+		{ name: 'Inline field title', value: 'Some value here', inline: true },
+	)
+	.addField('Inline field title', 'Some value here', true)
+	.setImage('https://i.imgur.com/AfFp7pu.png')
+	.setTimestamp()
+	.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
+
 
 dotenv.config();
 
@@ -33,8 +54,20 @@ const commands = {
             "text": interaction.options.getString("input")
         };
         shell.send(json);
+        
         shell.on("message", function (data) {
-            interaction.editReply(data.result.JP);
+            const exampleEmbed = new MessageEmbed()
+            .setColor('#0099ff')
+            .setAuthor({ name: '翻訳結果'})
+            .addFields(
+                { name: 'Input', value: interaction.options.getString("input"), inline: false },
+                { name: '-> JP', value: data.result.JP, inline: false },
+                { name: '-> EN', value: data.result.EN, inline: false },
+                { name: '-> KO', value: data.result.KO, inline: false },
+                { name: '-> CN', value: data.result.CN, inline: false },
+                { name: '-> TW', value: data.result.TW, inline: false },
+            )
+            interaction.editReply({ embeds: [exampleEmbed]});
         });
         return;
     }
